@@ -21,21 +21,23 @@ body {
     width: 90vw;        /* responsive width */
     max-width: 450px;   /* caps at reasonable size */
     aspect-ratio: 1/1;  /* keep square board */
-    gap: 5px;
+    gap: 0;
 }
 
 .square {
     width: 100%;
     height: 100%;
     background-color: black;
-    border: 1px solid rgb(242, 255, 2);
+    border: none;
+    outline: 1px solid rgb(242, 255, 2);
+
     color: yellow;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: clamp(40px, 10vw, 100px); /* responsive font */
     font-weight: bolder;
-    border-radius: 5px;
+    border-radius: 0;
     transition: 0.2s;
 }
 
@@ -78,5 +80,34 @@ body {
 
 #status.win { color: #2ecc71; }
 #status.draw { color: #f1c40f; }
+
+.square {
+    transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.square:active {
+    transform: scale(0.95);
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.square:not(:empty) {
+    animation: pop 0.15s ease-out;
+}
+
+.fade {
+    opacity: 0.35;
+    transition: opacity 0.4s ease;
+}
+
 
 
